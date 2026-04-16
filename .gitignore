@@ -1,0 +1,9 @@
+# Archivos no necesarios para el sitio
+*.rar
+*.ogg
+*.pdf
+transcripcion.txt
+970ff0bd-f515-4fba-ba62-30d5244ba90e.jpg
+
+# Claude Code
+.claude/
