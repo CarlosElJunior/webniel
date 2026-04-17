@@ -3414,6 +3414,172 @@ section { scroll-margin-top: 80px; }
     print-color-adjust: exact !important;
   }
 }
+
+/* ─────────────────────────  TESTIMONIOS  ───────────────────────── */
+.testimonios {
+  background: var(--ink);
+  overflow: hidden;
+}
+.testimonios .section-num { color: rgba(232,93,44,0.6); }
+
+.testi-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
+  position: relative;
+  z-index: 1;
+}
+
+.testi-watermark {
+  position: absolute;
+  bottom: -60px;
+  right: 0;
+  font-family: var(--serif);
+  font-size: clamp(160px, 22vw, 320px);
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(245,242,236,0.035);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+  z-index: 0;
+}
+
+.testi-header { margin-bottom: 52px; }
+
+.testi-headline {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5.2vw, 72px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--bg);
+  margin-top: 14px;
+  margin-bottom: 22px;
+}
+.testi-headline em { font-style: italic; }
+
+.testi-rule {
+  width: 52px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Grid de 4 cards */
+.testi-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.testi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Envoltorio de vídeo 9:16 */
+.testi-video-wrap {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #111110;
+  border: 1px solid rgba(232,93,44,0.2);
+  transition: border-color 0.35s var(--ease), transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.testi-card:hover .testi-video-wrap {
+  border-color: rgba(232,93,44,0.65);
+  transform: translateY(-6px);
+  box-shadow: 0 28px 56px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,93,44,0.1);
+}
+.testi-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Play overlay */
+.testi-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14,14,12,0.28);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s, background 0.3s;
+}
+.testi-play:hover { background: rgba(14,14,12,0.1); }
+.testi-play.hidden { opacity: 0; pointer-events: none; }
+
+.testi-play-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 10px rgba(232,93,44,0.14), 0 8px 24px rgba(232,93,44,0.45);
+  transition: transform 0.25s var(--ease), background 0.25s, box-shadow 0.25s;
+}
+.testi-play:hover .testi-play-icon {
+  transform: scale(1.12);
+  background: var(--accent-deep);
+  box-shadow: 0 0 0 16px rgba(232,93,44,0.1), 0 12px 36px rgba(232,93,44,0.55);
+}
+.testi-play-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+  margin-left: 3px;
+}
+
+.testi-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(245,242,236,0.72);
+}
+.testi-quote::before { content: '"'; color: var(--accent); }
+.testi-quote::after  { content: '"'; color: var(--accent); }
+
+.testi-name {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245,242,236,0.28);
+}
+
+/* Mobile: scroll horizontal */
+@media (max-width: 860px) {
+  .testi-strip {
+    grid-template-columns: unset;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 14px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .testi-strip::-webkit-scrollbar { display: none; }
+  .testi-card {
+    flex: 0 0 68vw;
+    scroll-snap-align: start;
+  }
+}
+@media (max-width: 540px) {
+  .testi-card { flex: 0 0 80vw; }
+  .testi-header { margin-bottom: 36px; }
+}
 </style>
 </head>
 <body>
@@ -3814,6 +3980,76 @@ section { scroll-margin-top: 80px; }
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ─────────────────────────  TESTIMONIOS  ───────────────────────── -->
+<section class="section testimonios" id="testimonios">
+  <div class="testi-watermark" aria-hidden="true">06</div>
+  <div class="testi-inner">
+
+    <span class="section-num">— 06 / Testimonios</span>
+
+    <div class="testi-header reveal">
+      <h2 class="testi-headline">Lo que dicen<br><em>los que estuvieron aquí.</em></h2>
+      <div class="testi-rule"></div>
+    </div>
+
+    <div class="testi-strip reveal-stagger">
+
+      <article class="testi-card">
+        <div class="testi-video-wrap">
+          <video src="Testimonio1.mp4" playsinline preload="none"></video>
+          <button class="testi-play" aria-label="Reproducir testimonio">
+            <span class="testi-play-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
+            </span>
+          </button>
+        </div>
+        <blockquote class="testi-quote">Ha sido un día de mucho aprendizaje, con herramientas que nos van a ayudar.</blockquote>
+        <span class="testi-name">Participante · Edición anterior</span>
+      </article>
+
+      <article class="testi-card">
+        <div class="testi-video-wrap">
+          <video src="Testimonio2.mp4" playsinline preload="none"></video>
+          <button class="testi-play" aria-label="Reproducir testimonio">
+            <span class="testi-play-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
+            </span>
+          </button>
+        </div>
+        <blockquote class="testi-quote">Segunda vez que vengo. Se lo recomiendo a todo el mundo que quiera mejorar.</blockquote>
+        <span class="testi-name">Participante · 2ª edición</span>
+      </article>
+
+      <article class="testi-card">
+        <div class="testi-video-wrap">
+          <video src="Testimonio3.mp4" playsinline preload="none"></video>
+          <button class="testi-play" aria-label="Reproducir testimonio">
+            <span class="testi-play-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
+            </span>
+          </button>
+        </div>
+        <blockquote class="testi-quote">Ha cambiado mi vida y sembrado una semilla para continuar este proceso de transformación.</blockquote>
+        <span class="testi-name">Participante · Edición anterior</span>
+      </article>
+
+      <article class="testi-card">
+        <div class="testi-video-wrap">
+          <video src="Testimonio4.mp4" playsinline preload="none"></video>
+          <button class="testi-play" aria-label="Reproducir testimonio">
+            <span class="testi-play-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5,3 19,12 5,21"/></svg>
+            </span>
+          </button>
+        </div>
+        <blockquote class="testi-quote">¿Quieres mejorar tu comunicación? Solo te digo dos palabras: Dani Corriola.</blockquote>
+        <span class="testi-name">Participante · Edición anterior</span>
+      </article>
+
+    </div>
   </div>
 </section>
 
@@ -4236,6 +4472,30 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 })();
 
 /* Programa: grid estático de 3 etapas — sin JS */
+
+/* ── Testimonios: play / pausa ── */
+document.querySelectorAll('.testi-card').forEach(card => {
+  const video = card.querySelector('video');
+  const btn   = card.querySelector('.testi-play');
+  if (!video || !btn) return;
+
+  btn.addEventListener('click', () => {
+    // Para todos los demás vídeos
+    document.querySelectorAll('.testi-video-wrap video').forEach(v => {
+      if (v !== video) {
+        v.pause();
+        v.currentTime = 0;
+        v.closest('.testi-video-wrap')?.querySelector('.testi-play')?.classList.remove('hidden');
+      }
+    });
+    video.muted = false;
+    video.play();
+    btn.classList.add('hidden');
+  });
+
+  video.addEventListener('ended', () => btn.classList.remove('hidden'));
+  video.addEventListener('pause',  () => btn.classList.remove('hidden'));
+});
 </script>
 
 </body>
