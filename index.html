@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Disfruta del Público — Formación presencial · Barcelona</title>
-<meta name="description" content="Una jornada para dejar de sufrir delante de un público y empezar a disfrutarlo. Hotel Abbot, Barcelona. 117€ (IVA incluido). Grupo máximo de 20 personas." />
+<meta name="description" content="Una jornada para dejar de sufrir delante de un público y empezar a disfrutarlo. Sábado 23 de mayo de 2026. Hotel Abbot, Barcelona. 117€ (IVA incluido). Grupo máximo de 20 personas." />
 <meta property="og:title" content="Disfruta del Público — Formación presencial" />
-<meta property="og:description" content="Aprende lo único que se interpone entre tú y disfrutar de estar delante de un público. 1 día en Barcelona, 117€ (IVA incluido)." />
+<meta property="og:description" content="Aprende lo único que se interpone entre tú y disfrutar de estar delante de un público. Sábado 23 de mayo de 2026 en Barcelona, 117€ (IVA incluido)." />
 <meta property="og:type" content="website" />
 
 <!-- Favicon: asterisco ✱ naranja sobre crema -->
@@ -83,6 +83,23 @@ body::-webkit-scrollbar {
   width: 0;
   height: 0;
   display: none;                   /* Chrome / Safari / Edge */
+}
+
+/* Focus accesible: visible solo con teclado, no en clicks de ratón */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.btn:focus-visible,
+.nav-links a:focus-visible {
+  outline-offset: 4px;
+}
+.hero .btn:focus-visible,
+.hero-corner:focus-visible,
+.cta :focus-visible {
+  outline-color: #fff;
 }
 
 /* Texturas sutiles de papel */
@@ -316,14 +333,17 @@ h1 .accent, h2 .accent {
   to { transform: scale(1); }
 }
 
-/* Overlay translúcido oscuro */
+/* Overlay translúcido oscuro — scrim suave, respeta la luz natural de la foto */
 .hero-bg::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(14,14,12,0.55) 0%, rgba(14,14,12,0.5) 50%, rgba(14,14,12,0.7) 100%),
-    radial-gradient(ellipse at center, rgba(14,14,12,0) 0%, rgba(14,14,12,0.3) 100%);
+    linear-gradient(180deg,
+      rgba(14,14,12,0.55) 0%,
+      rgba(14,14,12,0.25) 40%,
+      rgba(14,14,12,0.3) 60%,
+      rgba(14,14,12,0.65) 100%);
   z-index: 1;
 }
 /* Grano sutil */
@@ -338,59 +358,78 @@ h1 .accent, h2 .accent {
   opacity: 0.5;
 }
 
-/* Top metabar editorial */
+/* Top metabar editorial — playbill con fecha protagonista */
 .hero-metabar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 24px;
+  align-items: baseline;
+  gap: clamp(18px, 3vw, 36px);
+  padding-bottom: clamp(18px, 2vw, 24px);
   border-bottom: 1px solid rgba(255,255,255,0.18);
 }
-.hero-metabar .left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.85);
-  font-weight: 500;
-}
-.hero-metabar .right {
+.metabar-date {
   display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  align-items: baseline;
+  gap: clamp(8px, 1vw, 12px);
   font-family: var(--serif);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.metabar-date-kicker {
   font-style: italic;
-  font-size: 15px;
-  color: rgba(255,255,255,0.85);
-}
-.hero-metabar .live-dot {
-  width: 7px; height: 7px;
-  background: var(--accent);
-  border-radius: 50%;
-  position: relative;
-}
-.hero-metabar .live-dot::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  animation: pulse 2.4s var(--ease) infinite;
-}
-@keyframes pulse {
-  0%   { transform: scale(0.9); opacity: 1; }
-  100% { transform: scale(2.6); opacity: 0; }
-}
-.hero-metabar .ed-num {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 22px;
-  color: var(--accent);
+  font-size: clamp(14px, 1.4vw, 18px);
   font-weight: 400;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: -0.01em;
 }
+.metabar-date-num {
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 300;
+  color: var(--accent);
+  letter-spacing: -0.035em;
+  font-variation-settings: "opsz" 144;
+}
+.metabar-date-month {
+  font-size: clamp(13px, 1.25vw, 16px);
+  font-weight: 500;
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.95);
+}
+.metabar-divider {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.08));
+  min-width: 40px;
+}
+.metabar-place {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.metabar-place .bullet {
+  color: var(--accent);
+  margin: 0 8px;
+  font-style: normal;
+}
+
+/* Sello rotado del hero — edición + escasez */
+.hero-stamp {
+  position: absolute;
+  top: clamp(94px, 9vw, 118px);
+  right: clamp(16px, 3vw, 40px);
+  width: clamp(90px, 10vw, 128px);
+  height: clamp(90px, 10vw, 128px);
+  color: rgba(255,255,255,0.88);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+}
+.hero-stamp svg { width: 100%; height: 100%; display: block; }
 
 /* Stage centrado */
 .hero-stage {
@@ -444,8 +483,9 @@ h1 .accent, h2 .accent {
   margin: 0;
   color: #fff;
   text-wrap: balance;
+  hyphens: manual;
 }
-.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line { display: block; overflow: hidden; white-space: nowrap; }
 .hero h1 .line span { display: inline-block; }
 .hero h1 em {
   font-style: italic;
@@ -504,6 +544,52 @@ h1 .accent, h2 .accent {
 .hero-link:hover {
   color: #fff;
   border-bottom-color: #fff;
+}
+
+/* Flecha secundaria circular hacia el programa */
+.hero-arrow {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.35s var(--ease), border-color 0.35s var(--ease), transform 0.35s var(--ease);
+  position: relative;
+}
+.hero-arrow svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.4s var(--ease);
+}
+.hero-arrow:hover {
+  background: #fff;
+  border-color: #fff;
+  color: var(--ink);
+}
+.hero-arrow:hover svg {
+  transform: translateY(3px);
+}
+.hero-arrow-label {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  transition: color 0.35s var(--ease);
+}
+.hero-arrow:hover .hero-arrow-label {
+  color: #fff;
 }
 
 /* Scroll cue */
@@ -1408,7 +1494,7 @@ section { position: relative; z-index: 2; }
 /* ─────────────────────────  DETALLES ───────────────────────── */
 .details {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
@@ -1705,8 +1791,10 @@ section { position: relative; z-index: 2; }
   .brand-text .bot { font-size: 15px; }
 
   .hero { padding-top: 100px; padding-bottom: 48px; min-height: 92vh; }
-  .hero-metabar { padding-bottom: 18px; }
-  .hero-metabar .right { display: none; }
+  .hero-metabar { padding-bottom: 18px; gap: 18px; }
+  .metabar-divider { max-width: 80px; }
+  .metabar-place { font-size: 10px; letter-spacing: 0.18em; }
+  .hero-stamp { top: 80px; right: 16px; width: 82px; height: 82px; opacity: 0.8; }
   .hero-stage { padding: 32px 0; }
   .hero h1 {
     font-size: clamp(48px, 13vw, 96px);
@@ -1753,7 +1841,20 @@ section { position: relative; z-index: 2; }
   .details { grid-template-columns: 1fr; }
   .hero-actions .btn { width: 100%; justify-content: center; }
   .nav-links { gap: 0; }
-  .hero h1 { margin-bottom: 28px; }
+  .hero h1 {
+    font-size: clamp(44px, 13vw, 72px);
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+  }
+
+  .hero-metabar { gap: 10px; }
+  .metabar-divider { min-width: 20px; max-width: 40px; }
+  .metabar-date { gap: 6px; }
+  .metabar-date-num { font-size: clamp(34px, 10vw, 44px); }
+  .metabar-date-kicker { font-size: 12px; }
+  .metabar-date-month { font-size: 11px; letter-spacing: 0.16em; }
+  .metabar-place { font-size: 9px; letter-spacing: 0.14em; }
+  .hero-stamp { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1770,6 +1871,7 @@ section { position: relative; z-index: 2; }
 .audience-editorial {
   padding-top: clamp(80px, 10vw, 140px) !important;
   padding-bottom: clamp(60px, 8vw, 100px) !important;
+  scroll-margin-top: -60px;
 }
 .audience-head {
   max-width: 1100px;
@@ -2775,7 +2877,6 @@ html.intro-active, body.intro-active {
 
 /* Cuando termina el intro, body recibe .is-ready y todo entra con stagger */
 body.is-ready .hero-corner.tl   { animation: heroFade 0.9s var(--ease) 0.05s forwards; }
-body.is-ready .hero-corner.tr   { animation: heroFade 0.9s var(--ease) 0.12s forwards; }
 body.is-ready .hero-metabar     { animation: heroRise 1s var(--ease) 0.20s forwards; }
 body.is-ready .hero h1          { animation: heroTitleIn 1.3s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards; }
 body.is-ready .hero-stamps      { animation: heroRise 1s var(--ease) 0.80s forwards; }
@@ -2783,6 +2884,7 @@ body.is-ready .hero-sub         { animation: heroRise 1s var(--ease) 1.00s forwa
 body.is-ready .hero-actions     { animation: heroRise 1s var(--ease) 1.15s forwards; }
 body.is-ready .hero-corner.bl   { animation: heroFade 0.9s var(--ease) 1.30s forwards; }
 body.is-ready .hero-corner.br   { animation: heroFade 0.9s var(--ease) 1.35s forwards; }
+body.is-ready .hero-stamp       { animation: stampFadeIn 1.2s var(--ease) 1.40s forwards, stampSpin 40s linear 1.4s infinite; }
 body.is-ready .hero-scroll      { animation: heroRise 0.8s var(--ease) 1.50s forwards; }
 
 @keyframes heroFade {
@@ -2792,6 +2894,10 @@ body.is-ready .hero-scroll      { animation: heroRise 0.8s var(--ease) 1.50s for
 @keyframes heroRise {
   0%   { opacity: 0; transform: translateY(24px); }
   100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes stampFadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 0.9; }
 }
 @keyframes heroTitleIn {
   0%   { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(6px); }
@@ -3188,7 +3294,8 @@ section { scroll-margin-top: 80px; }
     transition: none !important;
   }
   .reveal, .reveal-stagger, .reveal-stagger > *,
-  .hero h1 .line span, .hero-metabar, .hero-sub, .hero-actions, .hero-portrait {
+  .hero h1 .line span, .hero-metabar, .hero-sub, .hero-actions, .hero-portrait,
+  .hero-stamp, .hero-corner {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -3300,7 +3407,7 @@ section { scroll-margin-top: 80px; }
       <a href="#quien">Quién soy</a>
       <a href="#detalles">Detalles</a>
       <span class="nav-divider"></span>
-      <a href="https://d1tqh0522pf.typeform.com/to/NwNwqjOD" target="_blank" rel="noopener" class="btn">Inscribirme <span class="btn-arrow">→</span></a>
+      <a href="https://tally.so/r/68QKbY" target="_blank" rel="noopener" class="btn">Inscribirme <span class="btn-arrow">→</span></a>
     </div>
   </div>
 </nav>
@@ -3308,28 +3415,38 @@ section { scroll-margin-top: 80px; }
 <!-- ─────────────────────────  HERO  ───────────────────────── -->
 <header class="hero" id="top">
   <div class="hero-bg" id="heroBg">
-    <img src="daniel.jpg"
-         alt="Daniel Escorriola Faneite"
+    <img src="portada.jpg"
+         alt="Daniel Escorriola frente a su público durante una formación"
          loading="eager" />
   </div>
   <div class="hero-vignette" aria-hidden="true"></div>
 
-  <span class="hero-corner tl" aria-hidden="true">Edición 01 · Barcelona</span>
-  <span class="hero-corner tr" aria-hidden="true">Una jornada</span>
   <span class="hero-corner bl" aria-hidden="true">Disfruta del público</span>
   <span class="hero-corner br" aria-hidden="true">MMXXVI</span>
+
+  <span class="hero-stamp" aria-hidden="true">
+    <svg viewBox="0 0 140 140" fill="none">
+      <defs>
+        <path id="hero-stamp-circle" d="M 70,70 m -54,0 a 54,54 0 1,1 108,0 a 54,54 0 1,1 -108,0"/>
+      </defs>
+      <circle cx="70" cy="70" r="62" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.5"/>
+      <text font-family="Fraunces, serif" font-style="italic" font-size="11" letter-spacing="3" fill="currentColor">
+        <textPath href="#hero-stamp-circle" startOffset="0">EDICIÓN 01 · PLAZAS LIMITADAS · </textPath>
+      </text>
+      <text x="70" y="80" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="34" fill="#E85D2C" font-weight="400">✱</text>
+    </svg>
+  </span>
 
   <div class="wrap">
 
     <div class="hero-metabar">
-      <span class="left">
-        <span class="ed-num">№ 01</span>
-        Formación presencial · Barcelona
+      <span class="metabar-date">
+        <span class="metabar-date-kicker">Sábado</span>
+        <span class="metabar-date-num">23</span>
+        <span class="metabar-date-month">Mayo</span>
       </span>
-      <span class="right">
-        <span class="live-dot"></span>
-        Próxima edición · plazas limitadas
-      </span>
+      <span class="metabar-divider" aria-hidden="true"></span>
+      <span class="metabar-place">Hotel Abbot<span class="bullet">·</span>Barcelona</span>
     </div>
 
     <div class="hero-stage">
@@ -3344,11 +3461,11 @@ section { scroll-margin-top: 80px; }
         Una jornada para dejar de sufrir cada vez que te pones delante de un público y empezar a <em>disfrutar</em> de exponerte.
       </p>
       <div class="hero-actions">
-        <a href="https://d1tqh0522pf.typeform.com/to/NwNwqjOD" target="_blank" rel="noopener" class="btn btn-primary">
-          Quiero hacerlo
-          <span class="btn-arrow">→</span>
+        <a href="#sobre" class="hero-arrow" aria-label="Ir a para quién es">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M6 13l6 6 6-6"/>
+          </svg>
         </a>
-        <a href="#programa" class="hero-link">Ver programa primero</a>
       </div>
     </div>
 
@@ -3609,7 +3726,13 @@ section { scroll-margin-top: 80px; }
     </div>
     <div class="details reveal-stagger">
       <div class="detail-cell">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/><path d="M8 13h3v3H8z"/></svg>
+        <span class="label">Fecha</span>
+        <span class="value">Sábado 23 de mayo</span>
+        <span class="meta">Edición 01 · 2026. Una única jornada.</span>
+      </div>
+      <div class="detail-cell">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 11a4 4 0 10-8 0"/><circle cx="12" cy="7" r="3"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
         <span class="label">Grupo</span>
         <span class="value">Máx. 20 personas</span>
         <span class="meta">Grupo reducido para garantizar tiempo de práctica.</span>
@@ -3671,7 +3794,7 @@ section { scroll-margin-top: 80px; }
         <span class="kicker">Tu plaza, esperando</span>
         <h2>¿Listo para <em>disfrutar</em><br>del público?</h2>
         <p class="cta-sub">117€ (IVA incluido) · Grupo máximo de 20 personas.</p>
-        <a href="https://d1tqh0522pf.typeform.com/to/NwNwqjOD" target="_blank" rel="noopener" class="btn magnetic">
+        <a href="https://tally.so/r/68QKbY" target="_blank" rel="noopener" class="btn magnetic">
           <span class="btn-inner">
             Rellenar el formulario
             <span class="btn-arrow">→</span>
