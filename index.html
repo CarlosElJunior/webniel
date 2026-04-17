@@ -3458,6 +3458,7 @@ section { scroll-margin-top: 80px; }
   margin-bottom: 22px;
 }
 .testi-headline em { font-style: italic; }
+.testi-hl { color: var(--accent); }
 
 .testi-rule {
   width: 52px;
@@ -3574,10 +3575,35 @@ section { scroll-margin-top: 80px; }
   .testi-card {
     flex: 0 0 68vw;
     scroll-snap-align: start;
+    position: relative;
+  }
+  /* Quote y nombre como overlay sobre el vídeo — así el card adyacente no muestra texto */
+  .testi-quote {
+    position: absolute;
+    bottom: 34px;
+    left: 0;
+    right: 0;
+    padding: 40px 14px 10px;
+    background: linear-gradient(to top, rgba(14,14,12,0.92) 0%, transparent 100%);
+    border-radius: 0 0 12px 12px;
+    z-index: 2;
+  }
+  .testi-name {
+    position: absolute;
+    bottom: 13px;
+    left: 14px;
+    z-index: 2;
+  }
+  /* Section-num estático en móvil — evita solapamiento con el titular */
+  .testimonios .section-num {
+    position: static;
+    display: block;
+    text-align: right;
+    margin-bottom: 10px;
   }
 }
 @media (max-width: 540px) {
-  .testi-card { flex: 0 0 80vw; }
+  .testi-card { flex: 0 0 82vw; }
   .testi-header { margin-bottom: 36px; }
 }
 </style>
@@ -3947,7 +3973,7 @@ section { scroll-margin-top: 80px; }
     <span class="section-num">— 05 / Testimonios</span>
 
     <div class="testi-header reveal">
-      <h2 class="testi-headline">Lo que dicen<br><em>los que estuvieron aquí.</em></h2>
+      <h2 class="testi-headline">Lo que pasa<br><em>cuando dejas de <span class="testi-hl">sufrir.</span></em></h2>
       <div class="testi-rule"></div>
     </div>
 
