@@ -3580,19 +3580,20 @@ section { scroll-margin-top: 80px; }
   /* Quote y nombre como overlay sobre el vídeo — así el card adyacente no muestra texto */
   .testi-quote {
     position: absolute;
-    bottom: 34px;
+    bottom: 0;
     left: 0;
     right: 0;
-    padding: 40px 14px 10px;
-    background: linear-gradient(to top, rgba(14,14,12,0.92) 0%, transparent 100%);
+    padding: 64px 16px 38px;
+    background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.72) 55%, transparent 100%);
     border-radius: 0 0 12px 12px;
     z-index: 2;
+    font-size: 13px;
   }
   .testi-name {
     position: absolute;
-    bottom: 13px;
-    left: 14px;
-    z-index: 2;
+    bottom: 16px;
+    left: 16px;
+    z-index: 3;
   }
   /* Section-num estático en móvil — evita solapamiento con el titular */
   .testimonios .section-num {
