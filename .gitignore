@@ -22,3 +22,9 @@ IMG_7418.mov
 .claude/
 
 .vercel
+
+# Variables de entorno — nunca commitear
+.env
+.env.*
+.env.local
+.env.*.local
